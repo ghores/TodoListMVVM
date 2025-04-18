@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
 }
 
@@ -13,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.example.todoappmvvm"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
