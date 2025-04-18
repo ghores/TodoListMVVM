@@ -69,8 +69,8 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     //DataBinding
-    implementation("androidx.databinding:databinding-common:4.0.0")
-    implementation("com.android.databinding:compiler:3.5.0")
+   // kapt("androidx.databinding:databinding-common:4.0.0")
+   // kapt("com.android.databinding:compiler:3.2.0")
     //RecyclerView Animator
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
 }
