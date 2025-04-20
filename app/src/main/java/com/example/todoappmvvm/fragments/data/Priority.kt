@@ -1,6 +1,6 @@
-package com.example.todoappmvvm.fragments.data;
+package com.example.todoappmvvm.fragments.data
 
-public enum Priority {
+enum class Priority {
     HIGH,
     MEDIUM,
     LOW
