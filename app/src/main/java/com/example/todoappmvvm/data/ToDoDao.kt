@@ -1,10 +1,11 @@
-package com.example.todoappmvvm.fragments.data
+package com.example.todoappmvvm.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.todoappmvvm.data.models.ToDoData
 
 @Dao
 interface ToDoDao {
