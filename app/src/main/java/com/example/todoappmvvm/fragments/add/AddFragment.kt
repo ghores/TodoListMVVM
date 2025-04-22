@@ -22,6 +22,7 @@ class AddFragment : Fragment() {
     //Binding
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
+
     //Other
     private val mToDoViewModel: ToDoViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
@@ -35,6 +36,10 @@ class AddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //Set menu
         setHasOptionsMenu(true)
+        //InitViews
+        binding.apply {
+            prioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -56,13 +61,15 @@ class AddFragment : Fragment() {
             val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
             if (validation) {
                 //Insert data to database
-                val newData = ToDoData(0, mTitle, mSharedViewModel.parsePriority(mPriority), mDescription)
+                val newData =
+                    ToDoData(0, mTitle, mSharedViewModel.parsePriority(mPriority), mDescription)
                 mToDoViewModel.insertData(newData)
-                Toast.makeText(requireContext(),"Successfully Added!!!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Successfully Added!!!", Toast.LENGTH_SHORT).show()
                 //Navigate back
                 findNavController().navigate(R.id.action_addFragment_to_listFragment)
             } else {
-                Toast.makeText(requireContext(),"Please fill out all fields.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
