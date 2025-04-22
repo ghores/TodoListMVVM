@@ -16,6 +16,7 @@ import com.example.todoappmvvm.data.models.Priority
 import com.example.todoappmvvm.data.models.ToDoData
 import com.example.todoappmvvm.data.viewmodel.ToDoViewModel
 import com.example.todoappmvvm.databinding.FragmentAddBinding
+import com.example.todoappmvvm.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
     //Binding
@@ -23,12 +24,9 @@ class AddFragment : Fragment() {
     private val binding get() = _binding!!
     //Other
     private val mToDoViewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,10 +53,10 @@ class AddFragment : Fragment() {
             val mTitle = titleEt.text.toString()
             val mPriority = prioritiesSpinner.selectedItem.toString()
             val mDescription = descriptionEt.text.toString()
-            val validation = verifyDataFromUser(mTitle, mDescription)
+            val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
             if (validation) {
                 //Insert data to database
-                val newData = ToDoData(0, mTitle, parsePriority(mPriority), mDescription)
+                val newData = ToDoData(0, mTitle, mSharedViewModel.parsePriority(mPriority), mDescription)
                 mToDoViewModel.insertData(newData)
                 Toast.makeText(requireContext(),"Successfully Added!!!",Toast.LENGTH_SHORT).show()
                 //Navigate back
@@ -66,29 +64,6 @@ class AddFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(),"Please fill out all fields.",Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun verifyDataFromUser(title: String, description: String): Boolean {
-
-        return !(title.isEmpty() || description.isEmpty())
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when (priority) {
-            "High Priority" -> {
-                Priority.HIGH
-            }
-
-            "Medium Priority" -> {
-                Priority.MEDIUM
-            }
-
-            "Low Priority" -> {
-                Priority.LOW
-            }
-
-            else -> Priority.LOW
         }
     }
 }
