@@ -21,11 +21,9 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
 
         override fun onNothingSelected(p0: AdapterView<*>?) {}
-
     }
 
     fun verifyDataFromUser(title: String, description: String): Boolean {
-
         return !(title.isEmpty() || description.isEmpty())
     }
 
